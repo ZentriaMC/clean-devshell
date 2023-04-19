@@ -7,7 +7,8 @@
 
 { name ? "clean-devshell"
 , packages ? [ ]
-}:
+, ...
+}@args:
 
 let
   bashPath = "${bashInteractive}/bin/bash";
@@ -17,7 +18,7 @@ let
   };
 in
 
-derivation {
+derivation (args // {
   inherit name system;
 
   builder = bashPath;
@@ -50,4 +51,4 @@ derivation {
       export SHELL=${bashPath}
     fi
   '';
-}
+})
